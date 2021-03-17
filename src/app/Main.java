@@ -24,6 +24,7 @@ public class Main {
         String outputFolder = scanner.nextLine();
         System.out.println("Enter wanted CSV file name (no extension needed) (optional press enter to continue):");
         String outputName = scanner.nextLine();
+
         String outPutCSV = readDocumentToCSV(filePath, logger);
         writeToFile(outPutCSV, outputFolder, outputName, logger);
     }
