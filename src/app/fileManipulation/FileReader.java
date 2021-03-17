@@ -13,7 +13,7 @@ public class FileReader {
     }
 
     public File readXML() {
-        return readXML(PathHelper.RESOURCE_FOLDER + PathHelper.XML_FILE);
+        return readXML(FileHelper.RESOURCE_FOLDER + FileHelper.XML_FILE);
     }
 
     public File readXML(String path) {
