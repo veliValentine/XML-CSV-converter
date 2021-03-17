@@ -1,6 +1,6 @@
 package app.modules;
 
-public class InvoiceDetailRow {
+public class InvoiceDetailRow implements CSVRow{
     private String product;
     private String productCode;
     private String qty;
@@ -15,6 +15,24 @@ public class InvoiceDetailRow {
     private String vatDeduction;
     private String vatType;
     private String vatStatus;
+
+    public String toCSVRow() {
+        StringBuilder sb = new StringBuilder(";");
+        sb.append(getProduct()).append(";");
+        sb.append(getProductCode()).append(";");
+        sb.append(getQty()).append(";");
+        sb.append(getUnit()).append(";");
+        sb.append(getPrice()).append(";");
+        sb.append(getDiscount()).append(";");
+        sb.append(getTax()).append(";");
+        sb.append(getComment()).append(";");
+        sb.append(getAccount()).append(";");
+        sb.append(getVatDeduction()).append(";");
+        sb.append(getVatType()).append(";");
+        sb.append(getVatStatus()).append(";");
+        sb.append("\n");
+        return sb.toString();
+    }
 
     public String getProduct() {
         if (product == null) {
@@ -146,24 +164,6 @@ public class InvoiceDetailRow {
 
     public void setVatStatus(String vatStatus) {
         this.vatStatus = vatStatus;
-    }
-
-    public String toCSVRow() {
-        StringBuilder sb = new StringBuilder(";");
-        sb.append(getProduct()).append(";");
-        sb.append(getProductCode()).append(";");
-        sb.append(getQty()).append(";");
-        sb.append(getUnit()).append(";");
-        sb.append(getPrice()).append(";");
-        sb.append(getDiscount()).append(";");
-        sb.append(getTax()).append(";");
-        sb.append(getComment()).append(";");
-        sb.append(getAccount()).append(";");
-        sb.append(getVatDeduction()).append(";");
-        sb.append(getVatType()).append(";");
-        sb.append(getVatStatus()).append(";");
-        sb.append("\n");
-        return sb.toString();
     }
 
     public String getCurrency() {
