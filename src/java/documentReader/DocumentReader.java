@@ -1,6 +1,9 @@
+package java.documentReader;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
+import java.InvoiceRow;
 import java.util.ArrayList;
 
 public class DocumentReader {

@@ -1,3 +1,5 @@
+package java;
+
 public class InvoiceRow {
     private String product;
     private String productCode;

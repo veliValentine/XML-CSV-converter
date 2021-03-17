@@ -1,5 +1,7 @@
+package java.documentReader;
+
 public class InvoiceRowTypes {
-    static final String INVOICE_ROW = "InvoiceRow";
+    static final String INVOICE_ROW = "java.InvoiceRow";
     static final String PRODUCT = "ArticleName";
     static final String PRODUCT_CODE = "ArticleIdentifier";
     static final String QTY = "OrderedQuantity";
