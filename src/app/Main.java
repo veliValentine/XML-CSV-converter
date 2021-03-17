@@ -1,9 +1,7 @@
-package java;
+package app;
 
+import app.documentReader.RowReader;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -27,11 +25,13 @@ public class Main {
     public static void main(String[] args) {
         File file = readXML(RESOURCE_FOLDER + XML_FILE);
         Document document = getDocument(file);
+        RowReader rowReader = new RowReader(document);
+
         StringBuilder sb = new StringBuilder();
-        //ArrayList<java.InvoiceRow> rows = getInvoiceRows(document);
-        //for (java.InvoiceRow row : rows) {
-//            sb.append(row.toCSVRow());
-//        }
+        ArrayList<InvoiceRow> rows = rowReader.getInvoiceRows();
+        for (InvoiceRow row : rows) {
+            sb.append(row.toCSVRow());
+        }
         System.out.println(sb.toString());
         writeToCSV(sb.toString());
     }

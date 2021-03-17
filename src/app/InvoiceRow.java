@@ -1,4 +1,4 @@
-package java;
+package app;
 
 public class InvoiceRow {
     private String product;

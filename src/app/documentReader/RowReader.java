@@ -1,16 +1,15 @@
-package java.documentReader;
+package app.documentReader;
 
+import app.InvoiceRow;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
-import java.InvoiceRow;
 import java.util.ArrayList;
 
-public class DocumentReader {
-    private Document document;
+public class RowReader extends DocumentReader{
 
-    public DocumentReader(Document document) {
-        this.document = document;
+    public RowReader(Document document){
+        super(document);
     }
 
     public ArrayList<InvoiceRow> getInvoiceRows() {
@@ -21,11 +20,6 @@ public class DocumentReader {
             rows.add(getRowInformation(i));
         }
         return rows;
-    }
-
-    private NodeList getData(String element) {
-        return document.getDocumentElement()
-                .getElementsByTagName(element.trim());
     }
 
     private InvoiceRow getRowInformation(int i) {
@@ -45,17 +39,5 @@ public class DocumentReader {
         row.setPrice(getTextContent(InvoiceRowTypes.PRICE, i));
         row.setTax(getTextContent(InvoiceRowTypes.VAT, i));
         return row;
-    }
-
-    private String getTextContent(String element, int i) {
-        return getData(element).item(i).getTextContent();
-    }
-
-    private String getAttributeValue(String element, int i, String attribute) {
-        return getData(element)
-                .item(i)
-                .getAttributes()
-                .getNamedItem(attribute)
-                .getNodeValue();
     }
 }
