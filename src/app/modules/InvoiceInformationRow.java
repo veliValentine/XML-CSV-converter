@@ -2,6 +2,7 @@ package app.modules;
 
 public class InvoiceInformationRow implements CSVRow, PaymentInformation, BuyerInformation {
     private String invoiceType;
+    private String codeListAgencyIdentifier;
     private String currency;
     private String slotC1;
     private String slotD1;
@@ -61,6 +62,17 @@ public class InvoiceInformationRow implements CSVRow, PaymentInformation, BuyerI
             return "";
         }
         return currency;
+    }
+
+    public String getCodeListAgencyIdentifier() {
+        if (codeListAgencyIdentifier == null) {
+            return "";
+        }
+        return codeListAgencyIdentifier;
+    }
+
+    public void setCodeListAgencyIdentifier(String codeListAgencyIdentifier) {
+        this.codeListAgencyIdentifier = codeListAgencyIdentifier;
     }
 
     @Override
@@ -193,7 +205,14 @@ public class InvoiceInformationRow implements CSVRow, PaymentInformation, BuyerI
 
     @Override
     public void setDate(String date) {
-        this.date = date;
+        this.date = parseDateFromCCYYMMDD(date);
+    }
+
+    private String parseDateFromCCYYMMDD(String date) {
+        String year = date.substring(0, 4);
+        String month = date.substring(4, 6);
+        String day = date.substring(6);
+        return day + "." + month + "." + year;
     }
 
     public String getSlotN1() {
