@@ -4,6 +4,7 @@ import app.documentReader.DocumentReader;
 import app.documentReader.InvoiceRowReader;
 import app.fileManipulation.FileReader;
 import app.fileManipulation.FileWriter;
+import app.modules.InvoiceDetailRow;
 import org.w3c.dom.Document;
 
 import java.util.ArrayList;
@@ -16,8 +17,8 @@ public class Main {
         InvoiceRowReader rowReader = new InvoiceRowReader(document);
 
         StringBuilder sb = new StringBuilder();
-        ArrayList<InvoiceRow> rows = rowReader.getInvoiceRows();
-        for (InvoiceRow row : rows) {
+        ArrayList<InvoiceDetailRow> rows = rowReader.getInvoiceRows();
+        for (InvoiceDetailRow row : rows) {
             sb.append(row.toCSVRow());
         }
 

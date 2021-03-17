@@ -1,6 +1,6 @@
-package app;
+package app.modules;
 
-public class InvoiceRow {
+public class InvoiceDetailRow {
     private String product;
     private String productCode;
     private String qty;

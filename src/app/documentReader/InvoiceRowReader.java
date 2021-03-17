@@ -1,6 +1,6 @@
 package app.documentReader;
 
-import app.InvoiceRow;
+import app.modules.InvoiceDetailRow;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
@@ -12,8 +12,8 @@ public class InvoiceRowReader extends DocumentReader {
         super(document);
     }
 
-    public ArrayList<InvoiceRow> getInvoiceRows() {
-        ArrayList<InvoiceRow> rows = new ArrayList<>();
+    public ArrayList<InvoiceDetailRow> getInvoiceRows() {
+        ArrayList<InvoiceDetailRow> rows = new ArrayList<>();
         NodeList invoiceRowElements = getData(InvoiceRowTypes.INVOICE_ROW);
         int rowCount = invoiceRowElements.getLength();
         for (int i = 0; i < rowCount; i++) {
@@ -22,8 +22,8 @@ public class InvoiceRowReader extends DocumentReader {
         return rows;
     }
 
-    private InvoiceRow getInvoiceRowInformation(int i) {
-        InvoiceRow row = new InvoiceRow();
+    private InvoiceDetailRow getInvoiceRowInformation(int i) {
+        InvoiceDetailRow row = new InvoiceDetailRow();
         row.setProduct(getTextContent(InvoiceRowTypes.PRODUCT, i));
         row.setProductCode(getTextContent(InvoiceRowTypes.PRODUCT_CODE, i));
         row.setQty(getTextContent(InvoiceRowTypes.QTY, i));
