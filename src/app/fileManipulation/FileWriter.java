@@ -17,7 +17,11 @@ public class FileWriter {
     }
 
     public boolean writeToCSV(String input, String fileName) {
-        try (PrintWriter writer = new PrintWriter((FileHelper.RESOURCE_FOLDER + fileName))) {
+        return writeToCSV(input, fileName, FileHelper.RESOURCE_FOLDER);
+    }
+
+    public boolean writeToCSV(String input, String fileName, String destinationPath) {
+        try (PrintWriter writer = new PrintWriter((destinationPath + fileName + ".csv"))) {
             writer.write(input);
             return true;
         } catch (Exception ex) {

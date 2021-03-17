@@ -9,13 +9,34 @@ import app.modules.InvoiceDetailRow;
 import app.modules.InvoiceInformationRow;
 import org.w3c.dom.Document;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Logger logger = new Logger();
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Enter path to XML file (optional press enter to continue):");
+        String filePath = scanner.nextLine();
+        System.out.println("Enter path to destination folder (optional press enter to continue):");
+        String outputFolder = scanner.nextLine();
+        System.out.println("Enter wanted CSV file name (no extension needed) (optional press enter to continue):");
+        String outputName = scanner.nextLine();
+        String outPutCSV = readDocumentToCSV(filePath, logger);
+        writeToFile(outPutCSV, outputFolder, outputName, logger);
+    }
+
+    private static String readDocumentToCSV(String path, Logger logger) {
         FileReader fileReader = new FileReader(logger);
-        Document document = DocumentReader.createDocument(fileReader.readXML(), logger);
+        File xml;
+        if (path.isBlank()) {
+            xml = fileReader.readXML();
+        } else {
+            xml = fileReader.readXML(path);
+        }
+        Document document = DocumentReader.createDocument(xml, logger);
 
         StringBuilder sb = new StringBuilder();
         InvoiceRowReader rowReader = new InvoiceRowReader(document);
@@ -27,30 +48,24 @@ public class Main {
         InvoiceInformationReader informationReader = new InvoiceInformationReader(document);
         InvoiceInformationRow informationRow = informationReader.getInvoiceInformation(rows.get(0).getCurrency());
         sb.insert(0, informationRow.toCSVRow());
+        return sb.toString();
+    }
 
+    private static void writeToFile(String csv, String folderPath, String fileName, Logger logger) {
         FileWriter fileWriter = new FileWriter(logger);
-        fileWriter.writeToCSV(sb.toString());
+        boolean isFolder = !folderPath.isBlank();
+        boolean isName = !fileName.isBlank();
+        if (isFolder && isName) {
+            fileWriter.writeToCSV(csv, fileName, folderPath);
+            System.out.print("File " + fileName + ".csv found at ");
+            System.out.println(folderPath);
+            return;
+        }
+        if (!isName) {
+            fileName = "result";
+        }
+        fileWriter.writeToCSV(csv, fileName);
+        System.out.print("File " + fileName + ".csv found at ");
+        System.out.println("resource folder");
     }
 }
-
-/*StringBuilder sb = new StringBuilder();
-
-        java.InvoiceRow row = new java.InvoiceRow();
-        System.out.println(row.toCSVRow());
-
-        sb.append(getData("InvoiceTypeCode", document) + ";");
-        System.out.println("GET CURRENCY");
-        sb.append(getData("BuyerPartyIdentifier", document) + ";");
-        sb.append(getData("BuyerOrganisationName", document) + ";");
-        sb.append(getData("PaymentOverDueFinePercent", document) + ";");
-        sb.append(getData("InvoiceDate", document) + ";");
-        System.out.println("***CONVERT TO dd.mm.yyyy***");
-        sb.append(getData("DeliveryOrganisationName", document) + ";");
-        sb.append(getData("DeliveryStreetName", document) + ";");
-        sb.append(getData("DeliveryTownName", document) + ";");
-        sb.append(getData("DeliveryPostCodeIdentifier", document) + ";");
-        sb.append(getData("CountryCode", document) + ";");
-        sb.append(getData("InvoiceFreeText", document) + ";");
-        System.out.println("---");
-        System.out.println(sb.toString());
-        writeToCSV(row.toCSVRow());*/
