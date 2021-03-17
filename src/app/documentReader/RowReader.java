@@ -6,9 +6,9 @@ import org.w3c.dom.NodeList;
 
 import java.util.ArrayList;
 
-public class RowReader extends DocumentReader{
+public class RowReader extends DocumentReader {
 
-    public RowReader(Document document){
+    public RowReader(Document document) {
         super(document);
     }
 
