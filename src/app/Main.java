@@ -1,10 +1,12 @@
 package app;
 
 import app.documentReader.DocumentReader;
+import app.documentReader.InvoiceInformationReader;
 import app.documentReader.InvoiceRowReader;
 import app.fileManipulation.FileReader;
 import app.fileManipulation.FileWriter;
 import app.modules.InvoiceDetailRow;
+import app.modules.InvoiceInformationRow;
 import org.w3c.dom.Document;
 
 import java.util.ArrayList;
@@ -14,13 +16,17 @@ public class Main {
         Logger logger = new Logger();
         FileReader fileReader = new FileReader(logger);
         Document document = DocumentReader.createDocument(fileReader.readXML(), logger);
-        InvoiceRowReader rowReader = new InvoiceRowReader(document);
 
         StringBuilder sb = new StringBuilder();
+        InvoiceRowReader rowReader = new InvoiceRowReader(document);
         ArrayList<InvoiceDetailRow> rows = rowReader.getInvoiceRows();
         for (InvoiceDetailRow row : rows) {
             sb.append(row.toCSVRow());
         }
+
+        InvoiceInformationReader informationReader = new InvoiceInformationReader(document);
+        InvoiceInformationRow informationRow = informationReader.getInvoiceInformation(rows.get(0).getCurrency());
+        sb.insert(0, informationRow.toCSVRow());
 
         FileWriter fileWriter = new FileWriter(logger);
         fileWriter.writeToCSV(sb.toString());
