@@ -20,6 +20,7 @@ public class InvoiceInformationReader extends DocumentReader {
         row.setDate(getTextContent("InvoiceDate"));
         row.setBillingAddress(getBillingAddress());
         row.setPostalAddress(getDeliveryAddress());
+        row.setFreeText(getTextContent("InvoiceFreeText"));
         return row;
     }
 }

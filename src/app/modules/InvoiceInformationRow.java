@@ -20,6 +20,7 @@ public class InvoiceInformationRow implements CSVRow, PaymentInformation, BuyerI
     private String slotP1;
     private String billingAddress;
     private String postalAddress;
+    private String freeText;
 
     public String toCSVRow() {
         StringBuilder sb = new StringBuilder();
@@ -41,6 +42,7 @@ public class InvoiceInformationRow implements CSVRow, PaymentInformation, BuyerI
         sb.append(getSlotP1()).append(";");
         sb.append(getBillingAddress()).append(";");
         sb.append(getPostalAddress()).append(";");
+        sb.append(getFreeText()).append(";");
         sb.append("\n");
         return sb.toString();
     }
@@ -270,5 +272,16 @@ public class InvoiceInformationRow implements CSVRow, PaymentInformation, BuyerI
 
     public void setPostalAddress(String postalAddress) {
         this.postalAddress = postalAddress;
+    }
+
+    public String getFreeText() {
+        if (freeText == null) {
+            return "";
+        }
+        return freeText;
+    }
+
+    public void setFreeText(String freeText) {
+        this.freeText = freeText;
     }
 }
