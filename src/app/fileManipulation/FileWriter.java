@@ -17,7 +17,7 @@ public class FileWriter {
     }
 
     public boolean writeToCSV(String input, String fileName) {
-        return writeToCSV(input, fileName, FileHelper.RESOURCE_FOLDER);
+        return writeToCSV(input, fileName, "./");
     }
 
     public boolean writeToCSV(String input, String fileName, String destinationPath) {
