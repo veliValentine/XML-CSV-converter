@@ -6,9 +6,9 @@ import org.w3c.dom.NodeList;
 
 import java.util.ArrayList;
 
-public class RowReader extends DocumentReader {
+public class InvoiceRowReader extends DocumentReader {
 
-    public RowReader(Document document) {
+    public InvoiceRowReader(Document document) {
         super(document);
     }
 
@@ -17,12 +17,12 @@ public class RowReader extends DocumentReader {
         NodeList invoiceRowElements = getData(InvoiceRowTypes.INVOICE_ROW);
         int rowCount = invoiceRowElements.getLength();
         for (int i = 0; i < rowCount; i++) {
-            rows.add(getRowInformation(i));
+            rows.add(getInvoiceRowInformation(i));
         }
         return rows;
     }
 
-    private InvoiceRow getRowInformation(int i) {
+    private InvoiceRow getInvoiceRowInformation(int i) {
         InvoiceRow row = new InvoiceRow();
         row.setProduct(getTextContent(InvoiceRowTypes.PRODUCT, i));
         row.setProductCode(getTextContent(InvoiceRowTypes.PRODUCT_CODE, i));

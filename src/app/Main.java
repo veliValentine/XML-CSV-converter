@@ -1,10 +1,11 @@
 package app;
 
 import app.documentReader.DocumentReader;
-import app.documentReader.RowReader;
+import app.documentReader.InvoiceRowReader;
 import app.fileManipulation.FileReader;
 import app.fileManipulation.FileWriter;
 import org.w3c.dom.Document;
+
 import java.util.ArrayList;
 
 public class Main {
@@ -12,7 +13,7 @@ public class Main {
         Logger logger = new Logger();
         FileReader fileReader = new FileReader(logger);
         Document document = DocumentReader.createDocument(fileReader.readXML(), logger);
-        RowReader rowReader = new RowReader(document);
+        InvoiceRowReader rowReader = new InvoiceRowReader(document);
 
         StringBuilder sb = new StringBuilder();
         ArrayList<InvoiceRow> rows = rowReader.getInvoiceRows();
