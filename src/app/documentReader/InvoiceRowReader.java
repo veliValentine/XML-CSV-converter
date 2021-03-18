@@ -1,5 +1,6 @@
 package app.documentReader;
 
+import app.Logger;
 import app.modules.InvoiceDetailRow;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -8,8 +9,8 @@ import java.util.ArrayList;
 
 public class InvoiceRowReader extends DocumentReader {
 
-    public InvoiceRowReader(Document document) {
-        super(document);
+    public InvoiceRowReader(Document document, Logger logger) {
+        super(document, logger);
     }
 
     public ArrayList<InvoiceDetailRow> getInvoiceRows() {
