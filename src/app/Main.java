@@ -57,7 +57,7 @@ public class Main {
         boolean isFolder = !folderPath.isBlank();
         boolean isName = !fileName.isBlank();
         if (isFolder && isName) {
-            fileWriter.writeToCSV(csv, fileName, folderPath);
+            fileWriter.writeToCSV(csv, fileName, folderPath + "/");
             System.out.print("File " + fileName + ".csv found at ");
             System.out.println(folderPath);
             return;
@@ -67,6 +67,6 @@ public class Main {
         }
         fileWriter.writeToCSV(csv, fileName);
         System.out.print("File " + fileName + ".csv found at ");
-        System.out.println("resource folder");
+        System.out.println("same folder folder");
     }
 }
