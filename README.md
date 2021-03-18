@@ -1,5 +1,5 @@
 # XML to CSV
-Converts standart Finvoice XML file to CSV file.
+Converts standard Finvoice XML file to CSV file.
 
 ### Table of contents
 - [XML to CSV](#xml-to-csv)
@@ -39,7 +39,7 @@ Application is an command line application and should be started using following
 After running the application four things are going to happen.
 
 1. Application asks for the XML file. If no file is entered, the application assumes that there is a XML file in the same folder with the JAR file. Assumed XML file is named ```exampleInvoice.xml```
-2. You can choose the destination folder for the output CSV. Otherwise it will be stored to the same folder as the JAR file
+2. You can choose the destination folder for the output CSV. Other wise it will be stored to the same folder as the JAR file
 3. It asks the wanted name for the CSV file. If a blank name is given it will default to ```result.csv```. **Name is required if destination folder is given.**
 4. It converts wanted XML file to CSV file
 
