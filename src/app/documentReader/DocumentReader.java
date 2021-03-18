@@ -3,17 +3,22 @@ package app.documentReader;
 import app.Logger;
 import app.modules.Address;
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DocumentReader {
     private final Document document;
+    private Logger logger;
 
-    public DocumentReader(Document document) {
+    public DocumentReader(Document document, Logger logger) {
         this.document = document;
+        this.logger = logger;
     }
 
     public static Document createDocument(File file, Logger logger) {
@@ -26,7 +31,6 @@ public class DocumentReader {
         }
         return null;
     }
-
 
 
     protected String getBillingAddress() {
@@ -50,8 +54,13 @@ public class DocumentReader {
     }
 
     protected NodeList getData(String element) {
-        return document.getDocumentElement()
-                .getElementsByTagName(element.trim());
+        try {
+            return document.getDocumentElement()
+                    .getElementsByTagName(element.trim());
+        } catch (Exception ex) {
+            logger.errorToConsole(ex.getMessage());
+            return null;
+        }
     }
 
     protected String getTextContent(String element) {

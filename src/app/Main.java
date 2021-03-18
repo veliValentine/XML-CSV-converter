@@ -40,13 +40,13 @@ public class Main {
         Document document = DocumentReader.createDocument(xml, logger);
 
         StringBuilder sb = new StringBuilder();
-        InvoiceRowReader rowReader = new InvoiceRowReader(document);
+        InvoiceRowReader rowReader = new InvoiceRowReader(document, logger);
         ArrayList<InvoiceDetailRow> rows = rowReader.getInvoiceRows();
         for (InvoiceDetailRow row : rows) {
             sb.append(row.toCSVRow());
         }
 
-        InvoiceInformationReader informationReader = new InvoiceInformationReader(document);
+        InvoiceInformationReader informationReader = new InvoiceInformationReader(document, logger);
         InvoiceInformationRow informationRow = informationReader.getInvoiceInformation(rows.get(0).getCurrency());
         sb.insert(0, informationRow.toCSVRow());
         return sb.toString();

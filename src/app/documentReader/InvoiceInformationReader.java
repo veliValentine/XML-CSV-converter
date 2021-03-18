@@ -1,12 +1,13 @@
 package app.documentReader;
 
+import app.Logger;
 import app.modules.InvoiceInformationRow;
 import org.w3c.dom.Document;
 
 public class InvoiceInformationReader extends DocumentReader {
 
-    public InvoiceInformationReader(Document document) {
-        super(document);
+    public InvoiceInformationReader(Document document, Logger logger) {
+        super(document, logger);
     }
 
     public InvoiceInformationRow getInvoiceInformation(String currency) {
